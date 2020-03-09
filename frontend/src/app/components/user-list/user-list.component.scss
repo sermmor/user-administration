@@ -1,0 +1,27 @@
+$lateral-card-margin: 0.53em;
+
+.user {
+    text-align: left;
+    background-color: #e6f2ff;
+    width: 25em;
+    border: 0.1em solid black;
+    border-radius: 0.5em;
+    float: left;
+    margin: 0.1em;
+}
+
+.user-name {
+    margin-left: $lateral-card-margin;
+}
+
+.edit-user {
+    float: left;
+    margin-left: $lateral-card-margin;
+    margin-bottom: $lateral-card-margin;
+}
+
+.delete-user {
+    float: right;
+    margin-right: $lateral-card-margin;
+    margin-bottom: $lateral-card-margin;
+}

@@ -1,0 +1,16 @@
+<div style="text-align: left;" *ngFor="let user of users">
+    <div class="user">
+        <h3 class="user-name">{{user.name}}</h3>
+        <ul>
+            <li>Street: {{user.street}}</li>
+            <li>Phone: {{user.phone}}</li>
+            <li>IBAN: {{user.iban}}</li>
+        </ul>
+        <div class="edit-user">
+            <a href="#">Edit</a>
+        </div>
+        <div class="delete-user">
+            <a href="#">Delete</a>
+        </div>
+    </div>
+</div>
