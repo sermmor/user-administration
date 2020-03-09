@@ -7,7 +7,7 @@ venv
 bootstrap-salt.sh
 .bash_history
 
-/**/out-tsc
-/**/dist
-/**/tmp
-/**/node_modules
+/frontend/out-tsc
+/frontend/dist
+/frontend/tmp
+/frontend/node_modules
