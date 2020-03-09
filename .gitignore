@@ -1,1 +1,13 @@
+.DS_Store
+*.sw*
+*.pyc
+*.bak
+venv
+/*.log
+bootstrap-salt.sh
+.bash_history
+
+*/out-tsc
+*/dist
+*/tmp
 */node_modules
