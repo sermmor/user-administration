@@ -17,14 +17,16 @@ export class AppComponent {
     this.authService.authState.subscribe((user) => {
       this.loggedIn = (user != null);
       
-      this.headerRequest = {'Authorization': 'Token ' + user.idToken};
+      this.headerRequest = {
+        'Authorization': 'Token ' + user.idToken
+      };
 
       // See user list.
-      const initRequest = {
+      const initGetUser = {
         method: 'GET',
         headers: this.headerRequest,
       };
-      fetch('http://testcase.rh-dev.eu:8000/api/users ', initRequest)
+      fetch('http://testcase.rh-dev.eu:8000/api/users', initGetUser)
         .then(response => {
           response.json().then(json => {
             console.log(json);
@@ -33,7 +35,21 @@ export class AppComponent {
       );
 
       // Add a user.
-      
+    //   const initAddedNewUser = {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       first_name: 'Pepe',
+    //       last_name: 'Gotera',
+    //       iban: 'ES9121000418450200051332'
+    //     }),
+    //     headers: {
+    //       ...this.headerRequest,
+    //       'Content-Type': 'application/json'
+    //     }
+    //   };
+    //   fetch('http://testcase.rh-dev.eu:8000/api/users', initAddedNewUser)
+    //     .then(res => res.json())
+    //     .then(response => console.log('Sucess:', response));
     });
   }
 
