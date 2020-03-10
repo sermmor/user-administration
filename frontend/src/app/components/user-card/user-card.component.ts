@@ -31,7 +31,7 @@ export class UserCardComponent implements OnInit {
       iban: ['']
     });
     this.userBehaviour.subscribe(observer => {
-      if (this.user) {
+      if (this.user && this.user.own) {
         this.editForm = this.formBuilder.group({
           firstName: [this.isNewUser ? '' : this.user.firstName],
           lastName: [this.isNewUser ? '' : this.user.lastName],
@@ -48,7 +48,7 @@ export class UserCardComponent implements OnInit {
         this.editForm.value.lastName,
         this.editForm.value.iban
       );
-    } else {
+    } else if (this.user.own) {
       UserManager.updateUserById(
         this.user.id!,
         this.editForm.value.firstName,

@@ -10,10 +10,10 @@
         <ul>
             <li>IBAN: {{user.iban}}</li>
         </ul>
-        <div class="edit-user fake-anchor">
+        <div *ngIf="user.own" class="edit-user fake-anchor">
             <a [routerLink]="['edit', user.id]">Edit</a>
         </div>
-        <div class="delete-user fake-anchor" (click)="deleteUser(user)">
+        <div *ngIf="user.own" class="delete-user fake-anchor" (click)="deleteUser(user)">
             Delete
         </div>
     </div>

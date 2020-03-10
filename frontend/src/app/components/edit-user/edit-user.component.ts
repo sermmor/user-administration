@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserManager } from 'src/app/models/user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,11 +11,15 @@ export class EditUserComponent implements OnInit {
 
   user: User;
 
-  constructor(private route: ActivatedRoute) {
-    const idUser = this.route.snapshot.params['id'];
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+    const idUser = this.activatedRoute.snapshot.params['id'];
 
     UserManager.getUserById(idUser).then((response: User) => {
-      this.user = response;
+      if (response.own) {
+        this.user = response;
+      } else {
+        this.router.navigate(['userlist']);
+      }
     })
   }
 

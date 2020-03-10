@@ -19,9 +19,11 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    UserManager.deleteUserById(user.id).then(() => {
-      window.location.reload();
-    });
+    if (user.own) {
+      UserManager.deleteUserById(user.id).then(() => {
+        window.location.reload();
+      });
+    }
   }
 
   updateUserList = () => {
