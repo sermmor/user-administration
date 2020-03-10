@@ -25,12 +25,19 @@ export class UserCardComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
+    this.editForm = this.formBuilder.group({
+      firstName: [''],
+      lastName: [''],
+      iban: ['']
+    });
     this.userBehaviour.subscribe(observer => {
-      this.editForm = this.formBuilder.group({
-        firstName: [this.isNewUser ? '' : this.user.firstName],
-        lastName: [this.isNewUser ? '' : this.user.lastName],
-        iban: [this.isNewUser ? '' : this.user.iban]
-      });
+      if (this.user) {
+        this.editForm = this.formBuilder.group({
+          firstName: [this.isNewUser ? '' : this.user.firstName],
+          lastName: [this.isNewUser ? '' : this.user.lastName],
+          iban: [this.isNewUser ? '' : this.user.iban]
+        });
+      }
     });
   }
 

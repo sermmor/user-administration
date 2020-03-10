@@ -16,7 +16,6 @@ export class EditUserComponent implements OnInit {
 
     UserManager.getUserById(idUser).then((response: User) => {
       this.user = response;
-      console.log(this.user.firstName);
     })
   }
 
