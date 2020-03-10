@@ -1,4 +1,4 @@
-<form action="userlist" [formGroup]="editForm">
+<form [formGroup]="editForm" (ngSubmit)="editUser()">
     <p>
         <label>id: </label>
         <input type="text" formControlName="id">

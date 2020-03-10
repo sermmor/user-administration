@@ -1,5 +1,6 @@
 import { User, UserManager } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
   users: User[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.users = [];
   }
 
@@ -27,5 +28,9 @@ export class UserListComponent implements OnInit {
     UserManager.getUsers().then((response: User[]) => {
       this.users = response;
     });
+  }
+
+  newUser() {
+    this.router.navigate(['userlist/new']);
   }
 }
