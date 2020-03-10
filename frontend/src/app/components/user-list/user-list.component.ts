@@ -20,7 +20,7 @@ export class UserListComponent implements OnInit {
 
   deleteUser(user: User) {
     UserManager.deleteUserById(user.id).then(() => {
-      this.updateUserList();
+      window.location.reload();
     });
   }
 

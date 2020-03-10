@@ -63,11 +63,17 @@ export class UserManager {
     }
 
     static deleteUserById(id: string): Promise<void> {
-        const indexUserToDelete = UserManager.searchUserIndexById(id);
+        const initDeleteUser = {
+            method: 'DELETE',
+            headers: {
+              ...UserManager.headerAuthorizationRequest,
+              'Content-Type': 'application/json'
+            }
+          };
 
         return new Promise<void>((resolve, reject) => {
-            usersMock.splice(indexUserToDelete, 1);
-            resolve();
+            fetch(apiUsersUrl + '/' + id, initDeleteUser)
+                .then(response => resolve());
         });
     }
 
