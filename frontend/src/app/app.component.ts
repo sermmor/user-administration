@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { UserManager } from './models/user';
 
@@ -8,6 +8,7 @@ import { UserManager } from './models/user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  userLogged: SocialUser;
   loggedIn: boolean;
   headerRequest: HeadersInit;
 
@@ -19,6 +20,7 @@ export class AppComponent {
         return;
       }
 
+      this.userLogged = user;
       this.loggedIn = (user != null);
       
       if (this.loggedIn) {
@@ -29,9 +31,5 @@ export class AppComponent {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-  signOut(): void {
-    this.authService.signOut();
   }
 }

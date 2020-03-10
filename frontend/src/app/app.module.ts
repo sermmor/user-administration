@@ -13,6 +13,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { appRoutes } from './app.routes';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { AdminCardComponent } from './components/admin-card/admin-card.component';
 
 let config = new AuthServiceConfig([
   {
@@ -32,6 +33,7 @@ export const provideConfig = () => {
     CreateUserComponent,
     EditUserComponent,
     UserCardComponent,
+    AdminCardComponent,
   ],
   imports: [
     BrowserModule,

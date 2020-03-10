@@ -1,0 +1,8 @@
+<div>
+    <img class="admin-photo" [src]="userLogged.photoUrl">
+    <div class="admin-info">
+        <p><label>{{userLogged.name}}</label></p>
+        <p><label>({{userLogged.email}})</label></p>
+        <p><button (click)="signOut()">Sign Out</button></p>
+    </div>
+</div>

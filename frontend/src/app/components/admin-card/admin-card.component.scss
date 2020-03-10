@@ -1,0 +1,11 @@
+$total-card-height: 100px;
+
+.admin-photo {
+    float: left;
+    height: $total-card-height;
+}
+
+.admin-info {
+    margin-left: 7em;
+    height: $total-card-height;
+}

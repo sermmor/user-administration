@@ -1,12 +1,15 @@
 <div>
-  <h1>
-    User Administration
-  </h1>
-  <div *ngIf="loggedIn; else userNotLoggin">
-    <div>
-      <button (click)="signOut()">Sign Out</button>
+  <div>
+    <h1>
+      User Administration
+    </h1>
+    <div *ngIf="loggedIn">
+      <app-admin-card [userLogged]="userLogged"></app-admin-card>
+      <br />
     </div>
-    <br />
+  </div>
+  
+  <div *ngIf="loggedIn; else userNotLoggin">
     <router-outlet></router-outlet>
   </div>
 
