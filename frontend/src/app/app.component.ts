@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { UserManager } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-lo
 export class AppComponent {
   // private user: SocialUser;
   loggedIn: boolean;
-  private headerRequest: HeadersInit;
+  headerRequest: HeadersInit;
 
   constructor(private authService: AuthService) {}
 
@@ -18,29 +19,12 @@ export class AppComponent {
       if (this.loggedIn === (user != null)) {
         return;
       }
-      
+
       this.loggedIn = (user != null);
       
       if (this.loggedIn) {
-        this.headerRequest = {
-          'Authorization': 'Token ' + user.idToken
-        };
+        UserManager.setAuthorizationToken(user.idToken);
       }
-
-      // See user list.
-      // if (this.loggedIn) {
-      //   const initGetUser = {
-      //     method: 'GET',
-      //     headers: this.headerRequest,
-      //   };
-      //   fetch('http://testcase.rh-dev.eu:8000/api/users', initGetUser)
-      //     .then(response => {
-      //       response.json().then(json => {
-      //         console.log(json);
-      //       });
-      //     }
-      //   );
-      // }
 
       // Add a user.
       // const initAddedNewUser = {

@@ -5,9 +5,22 @@ export interface User {
     firstName: string;
     lastName: string;
     iban: string;
+    own?: boolean;
 }
 
+const apiUsersUrl = 'http://testcase.rh-dev.eu:8000/api/users';
+
 export class UserManager {
+    private static headerRequest = {
+        'Authorization': 'Token '
+    }
+
+    static setAuthorizationToken(idToken: string) {
+        UserManager.headerRequest = {
+            'Authorization': 'Token ' + idToken
+        };
+    }
+
     static createUser(
         firstName: string,
         lastName: string,
@@ -49,7 +62,7 @@ export class UserManager {
     }
 
     static getUsers(): Promise<User[]> {
-        return this.getUsersFromJson();
+        return this.getUsersFromJson(UserManager.headerRequest);
     }
 
     static getUserById(id: string): Promise<User> {
@@ -65,11 +78,27 @@ export class UserManager {
         return usersMock.findIndex((user: User) => user.id === id);
     }
 
-    private static getUsersFromJson(): Promise<User[]> {
-        const usersAsinc = new Promise<User[]>((resolve, reject) => {
-            const users = usersMock;
-            resolve(users);
+    private static getUsersFromJson(headerRequest: HeadersInit): Promise<User[]> {
+        const initGetUser = {
+          method: 'GET',
+          headers: headerRequest,
+        };
+
+        return new Promise<User[]>((resolve, reject) => {
+            fetch(apiUsersUrl, initGetUser)
+              .then(response => {
+                response.json().then(json => {
+                    const users = json.map(jsonUser => ({
+                        id: jsonUser.id,
+                        firstName: jsonUser.first_name,
+                        lastName: jsonUser.last_name,
+                        iban: jsonUser.iban,
+                        own: jsonUser.own
+                    }));
+                    resolve(users);
+                });
+              }
+            );
         });
-        return usersAsinc;
     }
 }
