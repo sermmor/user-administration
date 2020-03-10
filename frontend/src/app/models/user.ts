@@ -50,15 +50,21 @@ export class UserManager {
         lastName: string,
         iban: string,
     ): Promise<User> {
-        const indexUserToUpdate = UserManager.searchUserIndexById(id);
-        const user = usersMock[indexUserToUpdate];
-        
-        user.firstName = firstName;
-        user.lastName = lastName;
-        user.iban = iban;
+        const user = { first_name: firstName, last_name: lastName, iban };
+
+        const initUpdateUser = {
+          method: 'PUT',
+          body: JSON.stringify(user),
+          headers: {
+            ...UserManager.headerAuthorizationRequest,
+            'Content-Type': 'application/json'
+          }
+        };
 
         return new Promise<User>((resolve, reject) => {
-            resolve(user);
+            fetch(apiUsersUrl + '/' + id, initUpdateUser)
+                .then(response => response.json())
+                .then(response => resolve(UserManager.fromJsonToUser(response)));
         });
     }
 
