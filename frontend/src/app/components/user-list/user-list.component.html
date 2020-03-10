@@ -1,4 +1,10 @@
-<div style="text-align: left;" *ngFor="let user of users">
+<div>
+    <form action="userlist/new" method="get">
+        <input type="submit" value="Add new user" />
+    </form>
+</div>
+
+<div class="user-list" *ngFor="let user of users">
     <div class="user">
         <h3 class="user-name">{{user.name}}</h3>
         <ul>

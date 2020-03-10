@@ -1,5 +1,10 @@
 $lateral-card-margin: 0.53em;
 
+.user-list {
+    text-align: left;
+    margin-top: $lateral-card-margin * 2;
+}
+
 .user {
     text-align: left;
     background-color: #e6f2ff;
