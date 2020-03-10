@@ -82,11 +82,19 @@ export class UserManager {
     }
 
     static getUserById(id: string): Promise<User> {
-        const indexUser = UserManager.searchUserIndexById(id);
+        const initGetUser = {
+            method: 'GET',
+            headers: UserManager.headerAuthorizationRequest,
+        };
 
         return new Promise<User>((resolve, reject) => {
-            const user: User = usersMock[indexUser];
-            resolve(user);
+            fetch(apiUsersUrl + '/' + id, initGetUser)
+                .then(response => {
+                    response.json().then(json => {
+                        const user = UserManager.fromJsonToUser(json);
+                        resolve(user);
+                    });
+                })
         });
     }
 
