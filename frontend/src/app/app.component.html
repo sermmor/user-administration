@@ -2,9 +2,15 @@
   <h1>
     User Administration
   </h1>
-  <button (click)="signInWithGoogle()">Sign in with Google</button>
-  <div>
-    <button (click)="signOut()">Sign Out</button>
+  <div *ngIf="loggedIn; else userNotLoggin">
+    <div>
+      <button (click)="signOut()">Sign Out</button>
+    </div>
+    <br />
+    <router-outlet></router-outlet>
   </div>
-  <router-outlet></router-outlet>
+
+  <ng-template #userNotLoggin>
+    <button (click)="signInWithGoogle()">Sign in with Google</button>
+  </ng-template>
 </div>

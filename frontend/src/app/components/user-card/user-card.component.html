@@ -1,29 +1,17 @@
 <form [formGroup]="editForm" (ngSubmit)="editUser()">
     <p>
-        <label>id: </label>
-        <input type="text" formControlName="id">
+        <label>First name: </label>
+        <input type="text" formControlName="firstName">
     </p>
     <p>
-        <label>name: </label>
-        <input type="text" formControlName="name">
-    </p>
-    <p>
-        <label>street: </label>
-        <input type="text" formControlName="street">
-    </p>
-    <p>
-        <label>phone: </label>
-        <input type="text" formControlName="phone">
+        <label>Last name: </label>
+        <input type="text" formControlName="lastName">
     </p>
     <p>
         <label>iban: </label>
         <input type="text" formControlName="iban">
     </p>
-    <p>
-        <label>isAdmin: </label>
-        <input type="text" formControlName="isAdmin">
-    </p>
-
+    
     <div *ngIf="isNewUser; else editSubmit">
         <input type="submit" value="Add user">
     </div>

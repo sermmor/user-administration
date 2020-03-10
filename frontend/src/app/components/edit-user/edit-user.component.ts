@@ -19,8 +19,6 @@ export class EditUserComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
 }
