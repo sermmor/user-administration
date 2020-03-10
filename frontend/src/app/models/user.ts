@@ -1,5 +1,3 @@
-import { usersMock } from '../mocks/users-mock';
-
 export interface User {
     id?: string;
     firstName: string;
@@ -102,10 +100,6 @@ export class UserManager {
                     });
                 })
         });
-    }
-
-    private static searchUserIndexById(id: string): number {
-        return usersMock.findIndex((user: User) => user.id === id);
     }
 
     private static getUsersFromJson(headerRequest: HeadersInit): Promise<User[]> {
