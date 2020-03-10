@@ -11,12 +11,12 @@ export interface User {
 const apiUsersUrl = 'http://testcase.rh-dev.eu:8000/api/users';
 
 export class UserManager {
-    private static headerRequest = {
+    private static headerAuthorizationRequest = {
         'Authorization': 'Token '
     }
 
     static setAuthorizationToken(idToken: string) {
-        UserManager.headerRequest = {
+        UserManager.headerAuthorizationRequest = {
             'Authorization': 'Token ' + idToken
         };
     }
@@ -26,11 +26,21 @@ export class UserManager {
         lastName: string,
         iban: string,
     ): Promise<User> {
-        const user = { firstName, lastName, iban };
+        const user = { first_name: firstName, last_name: lastName, iban };
+
+        const initAddedNewUser = {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: {
+            ...UserManager.headerAuthorizationRequest,
+            'Content-Type': 'application/json'
+          }
+        };
 
         return new Promise<User>((resolve, reject) => {
-            usersMock.push(user);
-            resolve(user);
+            fetch(apiUsersUrl, initAddedNewUser)
+                .then(response => response.json())
+                .then(response => resolve(UserManager.fromJsonToUser(response)));
         });
     }
 
@@ -40,7 +50,7 @@ export class UserManager {
         lastName: string,
         iban: string,
     ): Promise<User> {
-        const indexUserToUpdate = this.searchUserIndexById(id);
+        const indexUserToUpdate = UserManager.searchUserIndexById(id);
         const user = usersMock[indexUserToUpdate];
         
         user.firstName = firstName;
@@ -53,7 +63,7 @@ export class UserManager {
     }
 
     static deleteUserById(id: string): Promise<void> {
-        const indexUserToDelete = this.searchUserIndexById(id);
+        const indexUserToDelete = UserManager.searchUserIndexById(id);
 
         return new Promise<void>((resolve, reject) => {
             usersMock.splice(indexUserToDelete, 1);
@@ -62,11 +72,11 @@ export class UserManager {
     }
 
     static getUsers(): Promise<User[]> {
-        return this.getUsersFromJson(UserManager.headerRequest);
+        return UserManager.getUsersFromJson(UserManager.headerAuthorizationRequest);
     }
 
     static getUserById(id: string): Promise<User> {
-        const indexUser = this.searchUserIndexById(id);
+        const indexUser = UserManager.searchUserIndexById(id);
 
         return new Promise<User>((resolve, reject) => {
             const user: User = usersMock[indexUser];
@@ -88,17 +98,25 @@ export class UserManager {
             fetch(apiUsersUrl, initGetUser)
               .then(response => {
                 response.json().then(json => {
-                    const users = json.map(jsonUser => ({
-                        id: jsonUser.id,
-                        firstName: jsonUser.first_name,
-                        lastName: jsonUser.last_name,
-                        iban: jsonUser.iban,
-                        own: jsonUser.own
-                    }));
+                    const users = UserManager.fromJsonToUserList(json);
                     resolve(users);
                 });
               }
             );
         });
+    }
+
+    private static fromJsonToUserList(json: any): User[] {
+        return json.map(jsonUser => UserManager.fromJsonToUser(jsonUser));
+    }
+
+    private static fromJsonToUser(jsonUser: any): User {
+        return {
+            id: jsonUser.id,
+            firstName: jsonUser.first_name,
+            lastName: jsonUser.last_name,
+            iban: jsonUser.iban,
+            own: jsonUser.own
+        };
     }
 }
