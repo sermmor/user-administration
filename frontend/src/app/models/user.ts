@@ -48,9 +48,13 @@ export class UserManager {
         });
     }
 
-    static deleteUserById(id: string) {
+    static deleteUserById(id: string): Promise<void> {
         const indexUserToDelete = this.searchUserIndexById(id);
-        usersMock.splice(indexUserToDelete);
+
+        return new Promise<void>((resolve, reject) => {
+            usersMock.splice(indexUserToDelete, 1);
+            resolve();
+        });
     }
 
     static getUsers(): Promise<User[]> {

@@ -30,3 +30,9 @@ $lateral-card-margin: 0.53em;
     margin-right: $lateral-card-margin;
     margin-bottom: $lateral-card-margin;
 }
+
+.fake-anchor {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0000EE;
+}
