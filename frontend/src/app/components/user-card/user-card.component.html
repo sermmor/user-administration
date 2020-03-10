@@ -1,0 +1,33 @@
+<form action="userlist" [formGroup]="editForm">
+    <p>
+        <label>id: </label>
+        <input type="text" formControlName="id">
+    </p>
+    <p>
+        <label>name: </label>
+        <input type="text" formControlName="name">
+    </p>
+    <p>
+        <label>street: </label>
+        <input type="text" formControlName="street">
+    </p>
+    <p>
+        <label>phone: </label>
+        <input type="text" formControlName="phone">
+    </p>
+    <p>
+        <label>iban: </label>
+        <input type="text" formControlName="iban">
+    </p>
+    <p>
+        <label>isAdmin: </label>
+        <input type="text" formControlName="isAdmin">
+    </p>
+
+    <div *ngIf="isNewUser; else editSubmit">
+        <input type="submit" value="Add user">
+    </div>
+    <ng-template #editSubmit>
+        <input type="submit" value="Edit">
+    </ng-template>
+</form>

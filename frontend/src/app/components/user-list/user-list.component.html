@@ -12,11 +12,11 @@
             <li>Phone: {{user.phone}}</li>
             <li>IBAN: {{user.iban}}</li>
         </ul>
-        <div class="edit-user">
-            <a href="userlist/edit">Edit</a>
+        <div class="edit-user fake-anchor">
+            <a [routerLink]="['edit', user.id]">Edit</a>
         </div>
-        <div class="delete-user">
-            <span class="fake-anchor" (click)="deleteUser(user)">Delete</span>
+        <div class="delete-user fake-anchor" (click)="deleteUser(user)">
+            Delete
         </div>
     </div>
 </div>

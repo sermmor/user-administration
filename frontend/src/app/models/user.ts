@@ -61,6 +61,15 @@ export class UserManager {
         return this.getUsersFromJson();
     }
 
+    static getUserById(id: string): Promise<User> {
+        const indexUser = this.searchUserIndexById(id);
+
+        return new Promise<User>((resolve, reject) => {
+            const user: User = usersMock[indexUser];
+            resolve(user);
+        });
+    }
+
     private static searchUserIndexById(id: string): number {
         return usersMock.findIndex((user: User) => user.id === id);
     }
