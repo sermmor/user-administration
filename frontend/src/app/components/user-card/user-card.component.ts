@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User, UserManager } from 'src/app/models/user';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -18,27 +18,67 @@ export class UserCardComponent implements OnInit {
     return this.userBehaviour.getValue();
   }
 
-  editForm: FormGroup;
+  @ViewChild('submitButtonAdd') submitButtonAdd: ElementRef;
+  @ViewChild('submitButtonEdit') submitButtonEdit: ElementRef;
+  @ViewChild('errorFirstName') errorFirstName: ElementRef;
+  @ViewChild('errorLastName') errorLastName: ElementRef;
+  @ViewChild('errorIbanEmpty') errorIbanEmpty: ElementRef;
 
+  editForm: FormGroup;
   private userBehaviour = new BehaviorSubject<User>(undefined);
 
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.editForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      iban: ['']
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      iban: ['', Validators.required]
     });
     this.userBehaviour.subscribe(observer => {
       if (this.user && this.user.own) {
         this.editForm = this.formBuilder.group({
-          firstName: [this.isNewUser ? '' : this.user.firstName],
-          lastName: [this.isNewUser ? '' : this.user.lastName],
-          iban: [this.isNewUser ? '' : this.user.iban]
+          firstName: [this.isNewUser ? '' : this.user.firstName, Validators.required],
+          lastName: [this.isNewUser ? '' : this.user.lastName, Validators.required],
+          iban: [this.isNewUser ? '' : this.user.iban, Validators.required]
         });
       }
+      this.onCheckValidations();
     });
+  }
+
+
+  onCheckValidations() {
+    this.editForm.get('firstName').valueChanges.subscribe(firstName =>
+      this.onCheckEmptyField(firstName, this.errorFirstName)
+    );
+
+    this.editForm.get('lastName').valueChanges.subscribe(lastName =>
+      this.onCheckEmptyField(lastName, this.errorLastName)
+    );
+
+    this.editForm.get('iban').valueChanges.subscribe(iban =>
+      this.onCheckEmptyField(iban, this.errorIbanEmpty)
+    );
+  }
+
+  onCheckEmptyField(toCheck: any, errorLabel: ElementRef) {
+    if (this.isNewUser) {
+      this.submitButtonAdd.nativeElement.disabled = this.isAFieldsEmpty();
+    } else {
+      this.submitButtonEdit.nativeElement.disabled = this.isAFieldsEmpty();
+    }
+    if (toCheck === '') {
+      errorLabel.nativeElement.style = "display:inline;";
+    } else {
+      errorLabel.nativeElement.style = "display:none;";
+    }
+  }
+
+  isAFieldsEmpty(): boolean {
+    return this.editForm.get('firstName').value === '' 
+      || this.editForm.get('lastName').value === ''
+      || this.editForm.get('iban').value === '';
   }
 
   editUser() {

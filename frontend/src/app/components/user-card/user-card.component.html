@@ -2,20 +2,32 @@
     <p>
         <label>First name: </label>
         <input type="text" formControlName="firstName">
+        <label #errorFirstName class="errorLabel" style="display:none;">
+            Error: First name is empty.
+        </label>
     </p>
     <p>
         <label>Last name: </label>
         <input type="text" formControlName="lastName">
+        <label #errorLastName class="errorLabel" style="display:none;">
+            Error: Last name is empty.
+        </label>
     </p>
     <p>
-        <label>iban: </label>
+        <label>IBAN: </label>
         <input type="text" formControlName="iban">
+        <label #errorIbanEmpty class="errorLabel" style="display:none;">
+            Error: IBAN is empty.
+        </label>
+        <label #errorWrongIban class="errorLabel" style="display:none;">
+            Error: Wrong IBAN.
+        </label>
     </p>
     
     <div *ngIf="isNewUser; else editSubmit">
-        <input type="submit" value="Add user">
+        <input #submitButtonAdd type="submit" value="Add user" [disabled]="true">
     </div>
     <ng-template #editSubmit>
-        <input type="submit" value="Edit">
+        <input #submitButtonEdit type="submit" value="Edit">
     </ng-template>
 </form>
