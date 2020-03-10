@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User, UserManager } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { isValid as isValidIban } from 'iban';
 
 @Component({
   selector: 'app-user-card',
@@ -23,6 +24,7 @@ export class UserCardComponent implements OnInit {
   @ViewChild('errorFirstName') errorFirstName: ElementRef;
   @ViewChild('errorLastName') errorLastName: ElementRef;
   @ViewChild('errorIbanEmpty') errorIbanEmpty: ElementRef;
+  @ViewChild('errorWrongIban') errorWrongIban: ElementRef;
 
   editForm: FormGroup;
   private userBehaviour = new BehaviorSubject<User>(undefined);
@@ -35,6 +37,7 @@ export class UserCardComponent implements OnInit {
       lastName: ['', Validators.required],
       iban: ['', Validators.required]
     });
+
     this.userBehaviour.subscribe(observer => {
       if (this.user && this.user.own) {
         this.editForm = this.formBuilder.group({
@@ -57,8 +60,8 @@ export class UserCardComponent implements OnInit {
       this.onCheckEmptyField(lastName, this.errorLastName)
     );
 
-    this.editForm.get('iban').valueChanges.subscribe(iban =>
-      this.onCheckEmptyField(iban, this.errorIbanEmpty)
+    this.editForm.get('iban').valueChanges.subscribe(newIban => 
+      this.onCheckIbanField(newIban)
     );
   }
 
@@ -68,10 +71,25 @@ export class UserCardComponent implements OnInit {
     } else {
       this.submitButtonEdit.nativeElement.disabled = this.isAFieldsEmpty();
     }
-    if (toCheck === '') {
-      errorLabel.nativeElement.style = "display:inline;";
+
+    errorLabel.nativeElement.style = toCheck === '' ? "display:inline;" : "display:none;";
+  }
+
+  onCheckIbanField(newIban: any) {
+    this.onCheckEmptyField(newIban, this.errorIbanEmpty);
+    
+    if (newIban !== '') {
+      const validIban: boolean = isValidIban(newIban);
+  
+      if (this.isNewUser) {
+        this.submitButtonAdd.nativeElement.disabled = !validIban;
+      } else {
+        this.submitButtonEdit.nativeElement.disabled = !validIban;
+      }
+
+      this.errorWrongIban.nativeElement.style = validIban ? "display:none;" : "display:inline;";
     } else {
-      errorLabel.nativeElement.style = "display:none;";
+      this.errorWrongIban.nativeElement.style = "display:none;";
     }
   }
 
