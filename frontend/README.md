@@ -23,4 +23,11 @@ When we have completed the form, push in _Add user_ (if we don't want to add a n
 
 ![Capture4](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/04.png)
 
-We can add several users to get 
+So we can add several users to see more users in the user list:
+
+![Capture5](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/05.png)
+
+If you add an user log in with other Google account, you won't edit or deleted the added user in other account (manipulation operations are restricted on a user to the administrator who created them). For instance Christina Crawford in our example:
+
+![Capture6](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/06.png)
+
