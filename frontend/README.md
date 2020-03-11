@@ -19,7 +19,7 @@ If we want to add a new user, we have to push in the _Add new user_ button, and 
 
 ![Capture3](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/03.png)
 
-When we have completed the form, push in _Add user_ (if we don't want to add a new user, click in _Return to user list_ ), and we will be redirect to the user list (all the IBAN examples are from an [random IBAN generator](https://www.mobilefish.com/services/random_iban_generator/random_iban_generator.php)):
+When we have completed the form, push in _Add user_ (if we don't want to add a new user, click in _Return to user list_ ), and we will be redirect to the user list (all the IBAN examples are from a [random IBAN generator](https://www.mobilefish.com/services/random_iban_generator/random_iban_generator.php)):
 
 ![Capture4](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/04.png)
 
