@@ -44,3 +44,5 @@ If you push _Delete_ in a user, the user will be delete it from the user list (i
 ![Capture9](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/09.png)
 
 If we push _sign out_ button (in the top bar) we'll return to the first screen.
+
+![Capture10](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/01.png)
