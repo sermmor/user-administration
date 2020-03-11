@@ -77,16 +77,12 @@ export class UserCardComponent implements OnInit {
 
   onCheckIbanField(newIban: any) {
     this.onCheckEmptyField(newIban, this.errorIbanEmpty);
-    
+    this.checkIban(newIban);
+  }
+
+  checkIban(newIban: any) {
     if (newIban !== '') {
       const validIban: boolean = isValidIban(newIban);
-  
-      if (this.isNewUser) {
-        this.submitButtonAdd.nativeElement.disabled = !validIban;
-      } else {
-        this.submitButtonEdit.nativeElement.disabled = !validIban;
-      }
-
       this.errorWrongIban.nativeElement.style = validIban ? "display:none;" : "display:inline;";
     } else {
       this.errorWrongIban.nativeElement.style = "display:none;";
@@ -96,7 +92,8 @@ export class UserCardComponent implements OnInit {
   isAFieldsEmpty(): boolean {
     return this.editForm.get('firstName').value === '' 
       || this.editForm.get('lastName').value === ''
-      || this.editForm.get('iban').value === '';
+      || this.editForm.get('iban').value === ''
+      || !isValidIban(this.editForm.get('iban').value);
   }
 
   editUser() {

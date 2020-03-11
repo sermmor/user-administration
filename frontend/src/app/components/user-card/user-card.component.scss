@@ -1,3 +1,13 @@
 .error-label {
     color: red;
 }
+
+.user-card-form {
+    display: grid;
+    grid-template-columns: 7em 15em auto;
+    grid-gap: .5em;
+}
+
+.item-form {
+    text-align: center;
+}

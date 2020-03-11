@@ -1,28 +1,32 @@
 <form [formGroup]="editForm" (ngSubmit)="editUser()">
-    <p>
+    <div class="user-card-form">
         <label>First name: </label>
         <input type="text" formControlName="firstName">
-        <label #errorFirstName class="error-label" style="display:none;">
-            Error: First name is empty.
-        </label>
-    </p>
-    <p>
+        <div>
+            <label #errorFirstName class="error-label" style="display:none;">
+                Error: First name is empty.
+            </label>
+        </div>
+
         <label>Last name: </label>
         <input type="text" formControlName="lastName">
-        <label #errorLastName class="error-label" style="display:none;">
-            Error: Last name is empty.
-        </label>
-    </p>
-    <p>
+        <div>
+            <label #errorLastName class="error-label" style="display:none;">
+                Error: Last name is empty.
+            </label>
+        </div>
+
         <label>IBAN: </label>
         <input type="text" formControlName="iban">
-        <label #errorIbanEmpty class="error-label" style="display:none;">
-            Error: IBAN is empty.
-        </label>
-        <label #errorWrongIban class="error-label" style="display:none;">
-            Error: Wrong IBAN.
-        </label>
-    </p>
+        <div>
+            <label #errorIbanEmpty class="error-label" style="display:none;">
+                Error: IBAN is empty.
+            </label>
+            <label #errorWrongIban class="error-label" style="display:none;">
+                Error: Wrong IBAN.
+            </label>
+        </div>
+    </div>
     
     <div *ngIf="isNewUser; else editSubmit">
         <input #submitButtonAdd type="submit" value="Add user" [disabled]="true">
