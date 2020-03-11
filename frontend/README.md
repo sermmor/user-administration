@@ -1,6 +1,6 @@
 # User Administration
 
-## Install
+## Setup
 For install _User Administration_ run in terminal the command `npm install`.
 
 ## Run
