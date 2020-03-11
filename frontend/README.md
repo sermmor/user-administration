@@ -27,7 +27,20 @@ So we can add several users to see more users in the user list:
 
 ![Capture5](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/05.png)
 
-If you add an user log in with other Google account, you won't edit or deleted the added user in other account (manipulation operations are restricted on a user to the administrator who created them). For instance Christina Crawford in our example:
+If you add an user log in with other Google account, you won't edit or deleted the added user in other account (manipulation operations are restricted on a user to the administrator who created them). For instance, in our example Christina Crawford has been added using other Google account:
 
 ![Capture6](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/06.png)
 
+If you push _Edit_ you will be redirected to the _Edit User_ screen.
+
+![Capture7](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/07.png)
+
+We can modified anything and push _Edit_ to go back to the user list (in our example, the new name of Sophie Simpson is Rosemary Simpson).
+
+![Capture8](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/08.png)
+
+If you push _Delete_ in a user, the user will be delete it from the user list (in our example, Manuel Watts has been deleted from the system).
+
+![Capture9](https://github.com/sermmor/stoeer-test-angular/raw/master/frontend/readmeImages/09.png)
+
+If we push _sign out_ button (in the top bar) we'll return to the first screen.
