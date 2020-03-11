@@ -1,14 +1,15 @@
 <div>
-  <div>
-    <h1>
+  <div class="top-navbar">
+    <h1 class="title-navbar">
       User Administration
     </h1>
-    <div *ngIf="loggedIn">
+    <div *ngIf="loggedIn" class="info-user-navbar">
       <app-admin-card [userLogged]="userLogged"></app-admin-card>
-      <br />
     </div>
   </div>
-  
+
+  <div class="space-navbar"></div>
+
   <div *ngIf="loggedIn; else userNotLoggin">
     <router-outlet></router-outlet>
   </div>

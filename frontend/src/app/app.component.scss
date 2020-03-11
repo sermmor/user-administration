@@ -1,0 +1,27 @@
+$height-navbar: 5em;
+
+.top-navbar {
+    position: absolute;
+    width: 100%;
+    height: $height-navbar;
+    background: black;
+    color: whitesmoke;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    top: 0em;
+    left: 0em;
+}
+
+.space-navbar {
+    height: $height-navbar;
+    margin-bottom: 2em;
+}
+
+.title-navbar {
+    float: left;
+}
+
+.info-user-navbar {
+    float: right;
+}
