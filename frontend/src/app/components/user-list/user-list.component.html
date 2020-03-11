@@ -5,16 +5,20 @@
 </div>
 
 <div class="user-list" *ngFor="let user of users">
-    <div class="user">
-        <h3 class="user-name">{{user.firstName}} {{user.lastName}}</h3>
-        <ul>
-            <li>IBAN: {{user.iban}}</li>
-        </ul>
-        <div *ngIf="user.own" class="edit-user fake-anchor">
-            <a [routerLink]="['edit', user.id]">Edit</a>
-        </div>
-        <div *ngIf="user.own" class="delete-user fake-anchor" (click)="deleteUser(user)">
-            Delete
-        </div>
-    </div>
+    <mat-card class="user">
+        <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+        <mat-card-content>
+            <ul>
+                <li>IBAN: {{user.iban}}</li>
+            </ul>
+        </mat-card-content>
+        <mat-card-actions *ngIf="user.own">
+            <div class="edit-user fake-anchor">
+                <a [routerLink]="['edit', user.id]">Edit</a>
+            </div>
+            <div class="delete-user fake-anchor" (click)="deleteUser(user)">
+                Delete
+            </div>
+        </mat-card-actions>
+    </mat-card>
 </div>

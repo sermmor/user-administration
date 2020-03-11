@@ -29,9 +29,9 @@
     </div>
     
     <div *ngIf="isNewUser; else editSubmit">
-        <input #submitButtonAdd type="submit" value="Add user" [disabled]="true">
+        <input #submitButtonAdd style="margin-top: 1em;" type="submit" value="Add user" [disabled]="true">
     </div>
     <ng-template #editSubmit>
-        <input #submitButtonEdit type="submit" value="Edit">
+        <input #submitButtonEdit style="margin-top: 1em;" type="submit" value="Edit">
     </ng-template>
 </form>

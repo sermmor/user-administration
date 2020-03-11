@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms' ;
 import { ReactiveFormsModule} from '@angular/forms';
 
+import { MatCardModule } from '@angular/material/card';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 
@@ -14,6 +15,7 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { appRoutes } from './app.routes';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { AdminCardComponent } from './components/admin-card/admin-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let config = new AuthServiceConfig([
   {
@@ -41,6 +43,8 @@ export const provideConfig = () => {
     ReactiveFormsModule,
     SocialLoginModule,
     RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatCardModule,
   ],
   providers: [
     {
